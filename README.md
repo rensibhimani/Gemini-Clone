@@ -1,3 +1,2 @@
 # Gemini-Clone
 
-judsbcjcbbc

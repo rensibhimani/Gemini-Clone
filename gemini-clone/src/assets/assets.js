@@ -12,7 +12,7 @@ import send from '../assets/send.png'
 import setting from '../assets/setting.png'
 import user from '../assets/user.png'
 import youtube from '../assets/youtube.png'
-
+import shine from '../assets/shines.png'
 
 export const assets = {
     bulb,
@@ -28,5 +28,6 @@ export const assets = {
     send,
     setting,
     user,
+    shine,
     youtube
 }

@@ -12,10 +12,20 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultDate, setResultDate] = useState("");
   
-
+const delayPara = (index,nextWork) => {
+  
+}
 
   const onSent = async (prompt) => {
-    await runChat(input)
+    setResultDate("")
+    setLoading(true)
+    setShowResult(true)
+    setRecentPrompt(input)
+   const response = await runChat(input)
+   setResultDate(response)
+   setLoading(false)
+   setInput("")
+
   };
   // onSent("what is react?")
 

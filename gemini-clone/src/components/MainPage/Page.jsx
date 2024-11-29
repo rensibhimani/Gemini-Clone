@@ -20,7 +20,7 @@ const Page = () => {
         <img src={assets.user} alt="" />
       </div>
       <div className="main-container">
-        {!showResult ? 
+        {!showResult ? (
           <>
             <div className="greet">
               <p>
@@ -47,7 +47,7 @@ const Page = () => {
               </div>
             </div>
           </>
-         : 
+        ) : (
           <div className="result">
             <div className="result-title">
               <img src={assets.user} alt="" />
@@ -55,20 +55,24 @@ const Page = () => {
             </div>
             <div className="result-data">
               <img src={assets.shine} alt="" />
-              {loading? 
-              <div className="loader">
-<hr />
-<hr />
-<hr />
-              </div>: 
-               <p children={{__html: resultData}}> </p>
-              }
-              {/* <p>{resultData} </p> */}
+              {loading ? (
+                <div className="loader">
+                  <hr />
+                  <hr />
+                  <hr />
+                </div>
+              ) : (
+                <>
+                  {/* {console.log("Result Data Rendering:", resultData)} */}
+                  <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+                </>
+                // <p dangerouslySetInnerHTML={{ __html: resultData }}> </p>
+              )}
+
               {/* <p children={{__html: resultData}}> </p> */}
-              
             </div>
           </div>
-        }
+        )}
 
         <div className="main-bottom">
           <div className="search-box">

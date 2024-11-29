@@ -4,30 +4,47 @@ import runChat from "../config/gemini";
 export const Context = createContext();
 
 const ContextProvider = (props) => {
- 
-  const [input,setInput] = useState("");
+  const [input, setInput] = useState("");
   const [recentPrompt, setRecentPrompt] = useState("");
   const [prevPrompts, setPrevPrompts] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [resultDate, setResultDate] = useState("");
-  
-const delayPara = (index,nextWork) => {
-  
-}
+  const [resultData, setResultData] = useState("");
+
+  const delayPara = (index, nextWord) => {
+    setTimeout(function () {
+      setResultData((prev) => prev + nextWord);
+    }, 75 * index);
+  };
 
   const onSent = async (prompt) => {
-    setResultDate("")
-    setLoading(true)
-    setShowResult(true)
-    setRecentPrompt(input)
-   const response = await runChat(input)
-   setResultDate(response)
-   setLoading(false)
-   setInput("")
+    setResultData("");
+    setLoading(true);
+    setShowResult(true);
+    setRecentPrompt(input);
+    setPrevPrompts((prev) => [...prev, input]);
+    const response = await runChat(input);
 
+    let responseArray = response.split("**");
+    let newResponse;
+    for (let i = 0; i < responseArray.length; i++) {
+      if (i === 0 || i % 2 !== 2) {
+        newResponse += responseArray[i];
+      } else {
+        newResponse += "<b><br>" + responseArray[i] + "<br><b>";
+      }
+    }
+    let newResponse2 = newResponse.split("*").join("</br>");
+
+    let newResponseArray = newResponse2.split(" ");
+    for (let i = 0; i < newResponseArray.length; i++) {
+      const nextWord = newResponseArray[i];
+      delayPara(i, nextWord + " ");
+    }
+    // setResultData(newResponse2);
+    setLoading(false);
+    setInput("");
   };
-  // onSent("what is react?")
 
   const contextValue = {
     prevPrompts,
@@ -35,17 +52,15 @@ const delayPara = (index,nextWork) => {
     onSent,
     recentPrompt,
     setRecentPrompt,
-    
+
     showResult,
     loading,
-    resultDate,
+    resultData,
     input,
-    setInput
-  }
+    setInput,
+  };
   return (
-    <Context.Provider value={contextValue}>
-      {props.children}
-      </Context.Provider>
+    <Context.Provider value={contextValue}>{props.children}</Context.Provider>
   );
 };
 

@@ -85,7 +85,8 @@ const Page = () => {
             <div>
               <img src={assets.gallery} alt="" />
               <img src={assets.mic} alt="" />
-              <img onClick={() => onSent()} src={assets.send} alt="" />
+              {input?
+              <img onClick={() => onSent()} src={assets.send} alt="" />:null}
             </div>
           </div>
 

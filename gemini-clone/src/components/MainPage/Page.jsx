@@ -13,6 +13,7 @@ const Page = () => {
     setInput,
     input,
   } = useContext(Context);
+
   return (
     <div className="main">
       <div className="nav">
@@ -30,19 +31,28 @@ const Page = () => {
             </div>
             <div className="cards">
               <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
+                {/* <p>
+                  Human review some saved chats to improve Google AI. To stop
+                  this for future chats, turn off Gemini Apps Activity. If this
+                  setting is on, don't enter info you wouldn’t want reviewed or
+                  used.
+                </p> */}
+                <p>Mindset is what separates the best from the rest.</p>
                 <img src={assets.compass} alt="" />
               </div>
               <div className="card">
-                <p>Briefly summarize this concept: urban planning</p>
+                <p>
+                  Just one small positive thought in the morning can change your
+                  whole day.
+                </p>
                 <img src={assets.bulb} alt="" />
               </div>
               <div className="card">
-                <p>Brainstorm team bonding activities for our work retreat</p>
+                <p>Either you run the day or the day runs you</p>
                 <img src={assets.message} alt="" />
               </div>
               <div className="card">
-                <p>Tell me about React js and React native</p>
+                <p>Don't tell people your dreams. Show them</p>
                 <img src={assets.code} alt="" />
               </div>
             </div>
@@ -63,13 +73,9 @@ const Page = () => {
                 </div>
               ) : (
                 <>
-                  {/* {console.log("Result Data Rendering:", resultData)} */}
                   <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
                 </>
-                // <p dangerouslySetInnerHTML={{ __html: resultData }}> </p>
               )}
-
-              {/* <p children={{__html: resultData}}> </p> */}
             </div>
           </div>
         )}
@@ -85,8 +91,9 @@ const Page = () => {
             <div>
               <img src={assets.gallery} alt="" />
               <img src={assets.mic} alt="" />
-              {input?
-              <img onClick={() => onSent()} src={assets.send} alt="" />:null}
+              {input ? (
+                <img onClick={() => onSent()} src={assets.send} alt="" />
+              ) : null}
             </div>
           </div>
 

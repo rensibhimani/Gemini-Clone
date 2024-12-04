@@ -44,10 +44,10 @@ const newChat = () =>{
       if (i === 0 || i % 2 !== 2) {
         newResponse += responseArray[i];
       } else {
-        newResponse += "<b><br>" + responseArray[i] + "<br><b>";
+        newResponse += "<br>"  + responseArray[i] + "<br>";
       }
     }
-    let newResponse2 = newResponse.split("*").join("</br>");
+    let newResponse2 = newResponse.split("*").join("</b>");
 
     let newResponseArray = newResponse2.split(" ");
     for (let i = 0; i < newResponseArray.length; i++) {
@@ -72,6 +72,7 @@ const newChat = () =>{
     setInput,
     newChat
   };
+  
   return (
     <Context.Provider value={contextValue}>{props.children}</Context.Provider>
   );

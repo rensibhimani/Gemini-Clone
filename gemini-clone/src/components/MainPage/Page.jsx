@@ -2,17 +2,20 @@ import React, { useContext } from "react";
 import "./page.css";
 import { assets } from "../../assets/assets";
 import { Context } from "../../Context/Context";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 
 const Page = () => {
   const {
     onSent,
     recentPrompt,
     showResult,
+    loadingState,
     loading,
     resultData,
     setInput,
     input,
-  } = useContext(Context);
+  } = React.useContext(Context);
 
   return (
     <div className="main">
@@ -31,12 +34,6 @@ const Page = () => {
             </div>
             <div className="cards">
               <div className="card">
-                {/* <p>
-                  Human review some saved chats to improve Google AI. To stop
-                  this for future chats, turn off Gemini Apps Activity. If this
-                  setting is on, don't enter info you wouldn’t want reviewed or
-                  used.
-                </p> */}
                 <p>Mindset is what separates the best from the rest.</p>
                 <img src={assets.compass} alt="" />
               </div>
@@ -73,7 +70,10 @@ const Page = () => {
                 </div>
               ) : (
                 <>
-                  <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+                  <p
+                    style={{ marginTop: "0px" }}
+                    dangerouslySetInnerHTML={{ __html: resultData }}
+                  ></p>
                 </>
               )}
             </div>
@@ -83,16 +83,45 @@ const Page = () => {
         <div className="main-bottom">
           <div className="search-box">
             <input
+              onKeyDown={(e) => {
+                if (input && e.key === "Enter") {
+                  onSent();
+                }
+              }}
               onChange={(e) => setInput(e.target.value)}
               value={input}
               type="text"
               placeholder="Enter a prompt here"
             />
             <div>
-              <img src={assets.gallery} alt="" />
-              <img src={assets.mic} alt="" />
+              <img
+                src={assets.gallery}
+                alt=""
+                data-tooltip-id="upload-image"
+                data-tooltip-content="Upload image"
+              />
+              <Tooltip
+                id="upload-image"
+                // style={{ padding: "5px", fontSize: "12px", color: "#f0f4f9" }}
+              />
+              <img
+                src={assets.mic}
+                alt=""
+                data-tooltip-id="use-microphone"
+                data-tooltip-content="Use microphone"
+              />
+              <Tooltip
+                id="use-microphone"
+                // style={{ padding: "5px"0, fontSize: "12px", color: "#f0f4f9" }}
+              />
               {input ? (
-                <img onClick={() => onSent()} src={assets.send} alt="" />
+                <img
+                  onClick={() => onSent()}
+                  src={assets.send}
+                  alt=""
+                  data-tooltip-id="submit"
+                  data-tooltip-content="Submit"
+                />
               ) : null}
             </div>
           </div>
